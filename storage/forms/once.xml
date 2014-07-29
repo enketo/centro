@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>once</h:title>
+    <model>
+      <instance>
+        <once id="once">
+          <formhub>
+            <uuid/>
+          </formhub>
+          <a/>
+          <b/>
+          <c/>
+          <d/>
+          <note_b/>
+          <note_c/>
+          <note_d/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </once>
+      </instance>
+      <bind nodeset="/once/a" type="int"/>
+      <bind calculate=" /once/a  * 10" nodeset="/once/b" type="string"/>
+      <bind calculate="once(10 div  /once/a )" nodeset="/once/c" type="string"/>
+      <bind calculate="once(concat('this was the first value for a:',  /once/a ))" nodeset="/once/d" type="string"/>
+      <bind nodeset="/once/note_b" readonly="true()" type="string"/>
+      <bind nodeset="/once/note_c" readonly="true()" type="string"/>
+      <bind nodeset="/once/note_d" readonly="true()" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/once/meta/instanceID" readonly="true()" type="string"/>
+      <bind calculate="'9582550d27a9452997fa2379e9c5a918'" nodeset="/once/formhub/uuid" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="theme-formhub">
+    <input ref="/once/a">
+      <label>Enter number</label>
+    </input>
+    <input ref="/once/note_b">
+      <label>b: <output value=" /once/b "/></label></input>
+    <input ref="/once/note_c">
+      <label>c (once): <output value=" /once/c "/></label></input>
+    <input ref="/once/note_d">
+      <label>d (once): <output value=" /once/d "/></label></input>
+  </h:body>
+</h:html>

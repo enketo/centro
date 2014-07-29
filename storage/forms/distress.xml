@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>distress</h:title>
+    <model>
+      <instance>
+        <distress id="distress" version="2.1">
+          <formhub>
+            <uuid/>
+          </formhub>
+          <rep jr:template="">
+            <distr/>
+            <distr_note/>
+          </rep>
+          <hide/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </distress>
+      </instance>
+      <bind nodeset="/distress/rep" relevant="string-length( /distress/hide ) = 0"/>
+      <bind constraint=". &gt;= 0 and .&lt;= 10" nodeset="/distress/rep/distr" required="true()" type="int"/>
+      <bind nodeset="/distress/rep/distr_note" readonly="true()" type="string"/>
+      <bind nodeset="/distress/hide" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/distress/meta/instanceID" readonly="true()" type="string"/>
+      <bind calculate="'99f7ff48c0d542eea60ddff258829f6f'" nodeset="/distress/formhub/uuid" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/distress/rep">
+      <label>Integer widgets</label>
+      <repeat nodeset="/distress/rep">
+        <input appearance="distress" ref="/distress/rep/distr">
+          <label>Level of Distress</label>
+          <hint>Please select the level of distress you experienced in the past week including today (type=integer, appearance = distress). For optimal reliability this field is protected from invalid input with a constraint.</hint>
+        </input>
+        <input ref="/distress/rep/distr_note">
+          <label>Distress value: <output value=" /distress/rep/distr "/></label></input>
+      </repeat>
+    </group>
+    <input ref="/distress/hide">
+      <label>Enter text to hide repeats</label>
+    </input>
+  </h:body>
+</h:html>

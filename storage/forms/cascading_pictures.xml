@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Cascading Select with Picture label</h:title>
+    <model>
+      <itext>
+        <translation default="true()" lang="default">
+          <text id="/cascading_pictures/q1/b:label">
+            <value form="image">jr://images/b.jpg</value>
+          </text>
+          <text id="static_instance-happy_sad-0">
+            <value form="image">jr://images/happy.jpg</value>
+          </text>
+          <text id="static_instance-happy_sad-1">
+            <value form="image">jr://images/sad.jpg</value>
+          </text>
+          <text id="static_instance-a_b-1">
+            <value form="image">jr://images/b.jpg</value>
+          </text>
+          <text id="static_instance-a_b-0">
+            <value form="image">jr://images/a.jpg</value>
+          </text>
+          <text id="/cascading_pictures/q1/a:label">
+            <value form="image">jr://images/a.jpg</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <cascading_pictures id="cascading_pictures">
+          <formhub>
+            <uuid/>
+          </formhub>
+          <source/>
+          <q1/>
+          <q2/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </cascading_pictures>
+      </instance>
+      <instance id="a_b">
+        <root>
+          <item>
+            <itextId>static_instance-a_b-0</itextId>
+            <name>a</name>
+          </item>
+          <item>
+            <itextId>static_instance-a_b-1</itextId>
+            <name>b</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="happy_sad">
+        <root>
+          <item>
+            <itextId>static_instance-happy_sad-0</itextId>
+            <name>happy</name>
+            <condition>a</condition>
+          </item>
+          <item>
+            <itextId>static_instance-happy_sad-1</itextId>
+            <name>sad</name>
+            <condition>b</condition>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/cascading_pictures/source" readonly="true()" type="string"/>
+      <bind nodeset="/cascading_pictures/q1" type="select1"/>
+      <bind nodeset="/cascading_pictures/q2" type="select1"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/cascading_pictures/meta/instanceID" readonly="true()" type="string"/>
+      <bind calculate="'b74a5678ffe34f06a4e762ebb3d44cc1'" nodeset="/cascading_pictures/formhub/uuid" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="theme-formhub">
+    <input ref="/cascading_pictures/source">
+      <label>[form source](https://docs.google.com/spreadsheet/ccc?key=0Al3Mw5sknZoPdDVtcXQxdUNhbG9QMG9IQ2NNclZHM2c&amp;usp=sharing)</label>
+    </input>
+    <select1 ref="/cascading_pictures/q1">
+      <label>select one</label>
+      <item>
+        <label ref="jr:itext('/cascading_pictures/q1/a:label')"/>
+        <value>a</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/cascading_pictures/q1/b:label')"/>
+        <value>b</value>
+      </item>
+    </select1>
+    <select1 ref="/cascading_pictures/q2">
+      <label>select one</label>
+      <itemset nodeset="instance('happy_sad')/root/item[condition =  /cascading_pictures/q1 ]">
+        <value ref="name"/>
+        <label ref="jr:itext(itextId)"/>
+      </itemset>
+    </select1>
+  </h:body>
+</h:html>
