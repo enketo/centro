@@ -32,7 +32,7 @@ router
         res.set( {
             'Content-Type': 'text/xml'
         } );
-        form.getManifest( req.formId, req.headers.host )
+        form.getManifest( req.formId, req.protocol + '://' + req.headers.host )
             .then( function( manifest ) {
                 res.send( manifest.toString() );
             } );

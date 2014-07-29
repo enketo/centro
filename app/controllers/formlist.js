@@ -9,7 +9,7 @@ module.exports = function( app ) {
 };
 
 router.get( '/', function( req, res, next ) {
-    form.getXFormList( req.headers.host, req.query.verbose )
+    form.getXFormList( req.protocol + '://' + req.headers.host, req.query.verbose )
         .then( function( formList ) {
             res.set( {
                 'Content-Type': 'text/xml'

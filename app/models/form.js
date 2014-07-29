@@ -6,6 +6,7 @@ var fs = require( 'fs' ),
     Q = require( 'q' ),
     crypto = require( 'crypto' ),
     path = require( 'path' ),
+    url = require( 'url' ),
     utils = require( '../lib/utils' ),
     libxmljs = require( "libxmljs" ),
     debug = require( 'debug' )( 'form model' ),
@@ -136,7 +137,7 @@ Xform.prototype.getProperties = function( baseUrl, verbose ) {
     return this.initialize()
         .then( function() {
             props = {
-                formId: xform._getFormId(),
+                formID: xform._getFormId(),
                 name: xform._getName(),
                 majorMinorVersion: xform._getMajorMinorVersion(),
                 version: xform._getVersion(),
@@ -209,7 +210,7 @@ Xform.prototype._getDescriptionUrl = function() {
 };
 
 Xform.prototype._getDownloadUrl = function( baseUrl ) {
-    return path.join( baseUrl, 'form', this.id, 'form.xml' );
+    return url.resolve( baseUrl, path.join( 'form', this.id, 'form.xml' ) );
 };
 
 Xform.prototype._getManifestUrl = function( baseUrl ) {
@@ -220,7 +221,7 @@ Xform.prototype._getManifestUrl = function( baseUrl ) {
         if ( error || files.length === 0 ) {
             deferred.resolve( null );
         } else {
-            deferred.resolve( path.join( baseUrl, 'form', xform.id, 'manifest.xml' ) );
+            deferred.resolve( url.resolve( baseUrl, path.join( '/form/', xform.id, '/manifest.xml' ) ) );
         }
     } );
 
@@ -277,6 +278,5 @@ MediaFile.prototype._getHash = function() {
 };
 
 MediaFile.prototype._getDownloadUrl = function( baseUrl ) {
-    debug( 'parts', baseUrl, 'form', this.id, 'media', this.filename );
-    return path.join( baseUrl, 'form', this.id, 'media', this.filename );
+    return url.resolve( baseUrl, path.join( '/form/', this.id, '/media', this.filename ) );
 };
