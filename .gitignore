@@ -2,3 +2,4 @@ node_modules
 .rebooted
 *.sublime-project
 *.sublime-workspace
+npm-debug.log

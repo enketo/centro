@@ -18,12 +18,15 @@ future:
 * Node.js and npm
 
 ### Install
-* run `npm install`
-
-### Develop
-* install [nodemon](https://github.com/remy/nodemon)
-* run with `grunt develop`
+* install dependencies with `npm install`
 
 ### Use
 * place XForm in /storage/forms
 * configure Enketo or ODK Collect to use this server
+
+### Run
+* run with `node .` or `npm start`
+
+### Develop
+* install [nodemon](https://github.com/remy/nodemon)
+* run with `grunt develop`
