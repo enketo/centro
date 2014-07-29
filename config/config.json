@@ -1,0 +1,8 @@
+{
+    "name": "Centrum",
+    "port": 3000,
+    "enketo": {
+        "api url": "http://localhost:8005",
+        "api key": "enketorules"
+    }
+}

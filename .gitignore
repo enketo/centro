@@ -1,0 +1,4 @@
+node_modules
+.rebooted
+*.sublime-project
+*.sublime-workspace

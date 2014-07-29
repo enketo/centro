@@ -1,0 +1,14 @@
+.error {
+  margin: 40px 20px 20px 20px;
+  padding: 20px;
+  border: 1px solid #F2616D;
+  position: relative;
+  font-weight: normal;
+  min-height: 100px; }
+  .error .status-code {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-weight: normal;
+    font-size: 10px;
+    margin: 3px; }
