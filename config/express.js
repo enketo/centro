@@ -18,6 +18,9 @@ module.exports = function( app, config ) {
     app.set( 'port', process.env.PORT || app.get( "port" ) || 3000 );
     app.set( 'env', process.env.NODE_ENV || 'production' );
 
+    // pretty json API responses
+    app.set( 'json spaces', 4 );
+
     // middleware
     app.use( favicon( './public/img/favicon.ico' ) );
     app.use( logger( 'dev' ) );
@@ -28,7 +31,12 @@ module.exports = function( app, config ) {
     app.use( cookieParser() );
     app.use( compress() );
     app.use( express.static( './public' ) );
-    //app.use( express.static( './storage/forms' ) );
+
+    // set variables that should be accessible in all view templates
+    app.use( function( req, res, next ) {
+        res.locals.environment = app.get( 'env' );
+        next();
+    } );
 
     // error handling
     app.use( function( req, res, next ) {
@@ -38,23 +46,32 @@ module.exports = function( app, config ) {
     } );
 
     if ( app.get( 'env' ) === 'development' ) {
-        app.use( function( err, req, res ) {
+        app.use( function( err, req, res, next ) {
+            var body = {
+                code: err.status || 500,
+                message: err.message
+            };
             res.status( err.status || 500 );
-            res.render( 'error', {
-                message: err.message,
-                error: err,
-                title: 'error'
-            } );
+            if ( res.get( 'Content-type' ) === 'application/json' ) {
+                res.json( body );
+            } else {
+                res.render( 'error', body );
+            }
         } );
     }
 
-    app.use( function( err, req, res ) {
-        res.status( err.status || 500 );
-        res.render( 'error', {
+    app.use( function( err, req, res, next ) {
+        var body = {
+            code: err.status || 500,
             message: err.message,
-            error: {},
-            title: 'error'
-        } );
+            stack: err.stack
+        };
+        res.status( err.status || 500 );
+        if ( res.get( 'Content-type' ) === 'application/json' ) {
+            res.json( body );
+        } else {
+            res.render( 'error', body );
+        }
     } );
 
 };

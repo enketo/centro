@@ -20,12 +20,6 @@ if ( cluster.isMaster ) {
 
     var app = express();
 
-    // set variables that should be accessible in all view templates
-    app.use( function( req, res, next ) {
-        res.locals.environment = req.app.get( 'env' );
-        next();
-    } );
-
     var controllersPath = __dirname + '/app/controllers';
     fs.readdirSync( controllersPath ).forEach( function( file ) {
         if ( file.indexOf( '.js' ) >= 0 ) {

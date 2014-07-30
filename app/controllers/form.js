@@ -35,7 +35,8 @@ router
         form.getManifest( req.formId, req.protocol + '://' + req.headers.host )
             .then( function( manifest ) {
                 res.send( manifest.toString() );
-            } );
+            } )
+            .catch( next );
     } )
     .get( '/:formId/media/:filename', function( req, res, next ) {
         fs.createReadStream( path.join( formStoragePath, req.formId + '-media', req.filename ) ).pipe( res );
