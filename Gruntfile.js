@@ -71,6 +71,14 @@ module.exports = function( grunt ) {
                 }
             }
         },
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: 'spec'
+                },
+                src: [ 'test/**/*.spec.js' ]
+            }
+        },
         jsbeautifier: {
             test: {
                 src: [ "**/*.js", "!node_modules/**" ],
@@ -94,7 +102,7 @@ module.exports = function( grunt ) {
         },
     } );
 
-    grunt.registerTask( 'test', [ 'jshint', 'jsbeautifier:test' ] );
+    grunt.registerTask( 'test', [ 'jshint', 'jsbeautifier:test', 'mochaTest' ] );
     grunt.registerTask( 'build', [ 'sass' ] );
     grunt.registerTask( 'develop', [ 'concurrent:develop' ] );
     grunt.registerTask( 'default', [ 'jshint', 'jsbeautifier:test' ] );
