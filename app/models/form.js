@@ -112,14 +112,16 @@ function Xform( id ) {
         if ( error ) {
             deferred.reject( error );
         } else {
-            // remove the pesky default namespace
-            that.data = data.replace( / xmlns="http:\/\/www\.w3\.org\/2002\/xforms"/, '' );
-            // that.data = '<data>dfdsa';
+            that.data = data;
+            //that.data = '<data>dfdsa';
             try {
                 that.doc = libxmljs.parseXml( that.data );
+                that.namespaces = that._getNamespaces();
+
+                //debug( 'defaultNamespace', JSON.stringify( that.defaultNamespace[ 0 ] ) );
                 deferred.resolve( true );
             } catch ( e ) {
-                var err = new Error( 'XML Error: ' + JSON.stringify( e ) );
+                var err = new Error( 'XML Error in form "' + that.id + '": ' + JSON.stringify( e ) );
                 deferred.reject( err );
             }
         }
@@ -158,12 +160,24 @@ Xform.prototype.getProperties = function( baseUrl, verbose ) {
         } );
 };
 
+Xform.prototype._getNamespaces = function() {
+    // TODO: extract these from this.doc instead
+    return {
+        xmlns: "http://www.w3.org/2002/xforms",
+        h: "http://www.w3.org/1999/xhtml",
+        jr: "http://openrosa.org/javarosa",
+        orx: "http://openrosa.org/xforms/",
+        xsd: "http://www.w3.org/2001/XMLSchema",
+        ev: "http://www.w3.org/2001/xml-events"
+    };
+};
+
 Xform.prototype._getFormId = function() {
     var id;
 
-    id = this.doc.get( '//model/instance/node()[@id]' );
+    id = this.doc.get( '//xmlns:model/xmlns:instance/node()[@id]', this.namespaces );
     if ( !id ) {
-        throw new Error( 'id attribute not found' );
+        throw new Error( 'id attribute not found for form "' + this.id + '"' );
     }
     // there has to be a better way to get this id and version...
     id = id.attr( 'id' ).toString();
@@ -171,12 +185,10 @@ Xform.prototype._getFormId = function() {
 };
 
 Xform.prototype._getName = function() {
-    var title = this.doc.get( '//h:head/h:title', {
-        h: "http://www.w3.org/1999/xhtml"
-    } );
+    var title = this.doc.get( '//h:head/h:title', this.namespaces );
 
     if ( !title ) {
-        throw new Error( 'title element not found' );
+        throw new Error( 'title element not found for form "' + this.id + '"' );
     }
     return title.text();
 };
@@ -188,7 +200,7 @@ Xform.prototype._getMajorMinorVersion = function() {
 Xform.prototype._getVersion = function() {
     var version;
 
-    version = this.doc.get( '//model/instance/node()[@version]' );
+    version = this.doc.get( '//xmlns:model/xmlns:instance/node()[@version]', this.namespaces );
     if ( !version ) {
         return '';
     }
