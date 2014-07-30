@@ -1,5 +1,5 @@
 {
-    "name": "Centrum",
+    "name": "Centro",
     "port": 3000,
     "enketo": {
         "api url": "http://localhost:8005",

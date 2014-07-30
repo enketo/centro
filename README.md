@@ -1,4 +1,4 @@
-centrum
+centro [![Build Status](https://travis-ci.org/enketo/centro.png)](https://travis-ci.org/enketo/centro)
 =============
 
 A very basic proof-of-concept fully ODK-compliant server for use with Enketo and ODK Collect. 
@@ -19,6 +19,7 @@ future:
 
 ### Install
 * install dependencies with `npm install`
+* build with `grunt`
 
 ### Use
 * place XForm in /storage/forms
@@ -30,3 +31,4 @@ future:
 ### Develop
 * install [nodemon](https://github.com/remy/nodemon)
 * run with `grunt develop`
+* test with `grunt test`
