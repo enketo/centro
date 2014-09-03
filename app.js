@@ -31,7 +31,7 @@ if ( cluster.isMaster ) {
 
     var server = app.listen( app.get( 'port' ), function() {
         var worker = ( cluster.worker ) ? cluster.worker.id : 'Master';
-        var msg = 'Maniacal worker ' + worker + ' ready for duty at port ' + server.address().port + '! (environment: ' + app.get( 'env' ) + ')';
+        var msg = 'Worker ' + worker + ' ready for duty at port ' + server.address().port + '! (environment: ' + app.get( 'env' ) + ')';
         console.log( msg );
     } );
 }

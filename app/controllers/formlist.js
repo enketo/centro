@@ -6,10 +6,11 @@ var router = require( 'express' ).Router(),
 
 module.exports = function( app ) {
     app.use( '/formlist', router );
+    app.use( '/xformsList', router );
 };
 
 router.get( '/', function( req, res, next ) {
-    form.getXFormList( req.protocol + '://' + req.headers.host, req.query.verbose )
+    form.getXFormList( req.protocol + '://' + req.headers.host, req.query.formID, req.query.verbose )
         .then( function( formList ) {
             res.set( {
                 'Content-Type': 'text/xml'

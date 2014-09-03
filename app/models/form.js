@@ -17,7 +17,7 @@ module.exports = {
     getManifest: getManifest
 };
 
-function getXFormList( baseUrl, verbose ) {
+function getXFormList( baseUrl, formId, verbose ) {
     var xform, id,
         formList = new libxmljs.Document(),
         deferred = Q.defer(),
@@ -35,7 +35,12 @@ function getXFormList( baseUrl, verbose ) {
             files.forEach( function( file ) {
                 if ( file.indexOf( '.xml' ) >= 0 ) {
                     id = file.substring( 0, file.length - 4 );
-                    tasks.push( new Xform( id ).getProperties( baseUrl, verbose ) );
+                    // not efficient if formId provided
+                    // a database solution should query the database for only the record with the
+                    // requested formID
+                    if ( formId && id === formId || !formId ) {
+                        tasks.push( new Xform( id ).getProperties( baseUrl, verbose ) );
+                    }
                 }
             } );
             Q.all( tasks )
