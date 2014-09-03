@@ -3,3 +3,5 @@ node_modules
 *.sublime-project
 *.sublime-workspace
 npm-debug.log
+public/css
+public/js
