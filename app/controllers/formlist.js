@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
-var router = require( 'express' ).Router(),
-    debug = require( 'debug' )( 'formlist controller' ),
-    form = require( '../models/form' );
+let router = require( 'express' ).Router();
+let debug = require( 'debug' )( 'formlist controller' );
+let formList = require( '../models/formList' );
 
 module.exports = function( app ) {
-    app.use( '/formlist', router );
+    app.use( '/formList', router );
     app.use( '/xformsList', router );
 };
 
 router.get( '/', function( req, res, next ) {
-    form.getXFormList( req.protocol + '://' + req.headers.host, req.query.formID, req.query.verbose )
+    formList.get( req.protocol + '://' + req.headers.host, req.query.formID, req.query.verbose )
         .then( function( formList ) {
             res.set( {
                 'Content-Type': 'text/xml'

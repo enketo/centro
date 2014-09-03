@@ -14,7 +14,7 @@ if ( cluster.isMaster ) {
         cluster.fork();
     } );
 } else {
-    var express = require( 'express' ),
+    /*var express = require( 'express' ),
         fs = require( 'fs' ),
         config = require( './config/config' );
 
@@ -29,6 +29,13 @@ if ( cluster.isMaster ) {
 
     require( './config/express' )( app, config );
 
+    var server = app.listen( app.get( 'port' ), function() {
+        var worker = ( cluster.worker ) ? cluster.worker.id : 'Master';
+        var msg = 'Worker ' + worker + ' ready for duty at port ' + server.address().port + '! (environment: ' + app.get( 'env' ) + ')';
+        console.log( msg );
+    } );*/
+
+    var app = require( './config/express' );
     var server = app.listen( app.get( 'port' ), function() {
         var worker = ( cluster.worker ) ? cluster.worker.id : 'Master';
         var msg = 'Worker ' + worker + ' ready for duty at port ' + server.address().port + '! (environment: ' + app.get( 'env' ) + ')';

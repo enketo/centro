@@ -1,15 +1,9 @@
 /* global describe, require, it, before, after, beforeEach, afterEach */
-"use strict";
+'use strict';
 
-var //Q = require( "q" ),
-    chai = require( "chai" ),
-    expect = chai.expect,
-    utils = require( '../app/lib/utils' );
-//chaiAsPromised = require( "chai-as-promised" ),
-//config = require( "../config/config" ),
-//model = require( '../app/models/form' );
-
-//chai.use( chaiAsPromised );
+let chai = require( 'chai' );
+let expect = chai.expect;
+let utils = require( '../app/lib/utils' );
 
 describe( 'Utils library', function() {
 

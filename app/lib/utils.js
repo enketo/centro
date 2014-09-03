@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-var crypto = require( 'crypto' ),
-    debug = require( 'debug' )( 'utils' );
+let crypto = require( 'crypto' );
+let debug = require( 'debug' )( 'utils' );
 
 function _md5( message ) {
-    var hash = crypto.createHash( 'md5' );
+    let hash = crypto.createHash( 'md5' );
     hash.update( message );
     return hash.digest( 'hex' );
 }

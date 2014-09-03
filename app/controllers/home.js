@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-var express = require( 'express' ),
-    router = express.Router();
+let express = require( 'express' );
+let router = express.Router();
 
 module.exports = function( app ) {
     app.use( '/', router );

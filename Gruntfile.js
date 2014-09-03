@@ -25,14 +25,7 @@ module.exports = function( grunt ) {
             dev: {
                 script: './app.js',
                 options: {
-                    //nodeArgs: [ '--debug' ],
-                    callback: function( nodemon ) {
-                        nodemon.on( 'restart', function() {
-                            setTimeout( function() {
-                                require( 'fs' ).writeFileSync( '.rebooted', 'rebooted' );
-                            }, 1000 );
-                        } );
-                    },
+                    watch: [ 'app', 'config' ],
                     env: {
                         NODE_ENV: 'development',
                         DEBUG: '*, -express:*, -send'
@@ -105,5 +98,5 @@ module.exports = function( grunt ) {
     grunt.registerTask( 'test', [ 'jshint', 'jsbeautifier:test', 'mochaTest' ] );
     grunt.registerTask( 'build', [ 'sass' ] );
     grunt.registerTask( 'develop', [ 'concurrent:develop' ] );
-    grunt.registerTask( 'default', [ 'jshint', 'jsbeautifier:test' ] );
+    grunt.registerTask( 'default', [ 'jshint', 'jsbeautifier:test', 'build' ] );
 };

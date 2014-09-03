@@ -4,5 +4,6 @@
     "enketo": {
         "api url": "http://localhost:8005/api/v1",
         "api key": "enketorules"
-    }
+    },
+    "max submission size": 50000000
 }

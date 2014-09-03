@@ -1,12 +1,11 @@
 /* global describe, require, it, before, after, beforeEach, afterEach */
-"use strict";
+'use strict';
 
-var Q = require( "q" ),
-    chai = require( "chai" ),
-    expect = chai.expect,
-    chaiAsPromised = require( "chai-as-promised" ),
-    config = require( "../config/config" ),
-    model = require( '../app/models/form' );
+let chai = require( 'chai' );
+let expect = chai.expect;
+let chaiAsPromised = require( 'chai-as-promised' );
+let config = require( "../config/config" );
+let model = require( '../app/models/Xform' );
 
 chai.use( chaiAsPromised );
 

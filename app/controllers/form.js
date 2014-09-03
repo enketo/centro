@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-var router = require( 'express' ).Router(),
-    fs = require( 'fs' ),
-    debug = require( 'debug' )( 'form controller' ),
-    form = require( '../models/form' ),
-    path = require( 'path' ),
-    formStoragePath = path.resolve( __dirname, '../../storage/forms' );
+let router = require( 'express' ).Router();
+let fs = require( 'fs' );
+let debug = require( 'debug' )( 'form controller' );
+let manifest = require( '../models/formManifest' );
+let path = require( 'path' );
+let formStoragePath = path.resolve( __dirname, '../../storage/forms' );
 
 module.exports = function( app ) {
     app.use( '/form', router );
@@ -32,7 +32,7 @@ router
         res.set( {
             'Content-Type': 'text/xml'
         } );
-        form.getManifest( req.formId, req.protocol + '://' + req.headers.host )
+        manifest.get( req.formId, req.protocol + '://' + req.headers.host )
             .then( function( manifest ) {
                 res.send( manifest.toString() );
             } )
