@@ -41,4 +41,5 @@ if ( cluster.isMaster ) {
         var msg = 'Worker ' + worker + ' ready for duty at port ' + server.address().port + '! (environment: ' + app.get( 'env' ) + ')';
         console.log( msg );
     } );
+    server.timeout = 6 * 60 * 1000;
 }

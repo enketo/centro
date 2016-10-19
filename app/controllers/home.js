@@ -10,6 +10,6 @@ module.exports = function( app ) {
 router.get( '/', function( req, res, next ) {
 
     res.render( 'index', {
-        title: req.app.get( 'name' ) + ' - a brand new server for the ODK ecosystem'
+        title: req.app.get( 'name' ) + ' - a brand new server for the OpenRosa/ODK ecosystem'
     } );
 } );
