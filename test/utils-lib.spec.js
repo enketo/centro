@@ -1,17 +1,16 @@
-/* global describe, require, it, before, after, beforeEach, afterEach */
-'use strict';
+/* eslint-env mocha */
 
-let chai = require( 'chai' );
-let expect = chai.expect;
-let utils = require( '../app/lib/utils' );
+const chai = require( 'chai' );
+const expect = chai.expect;
+const utils = require( '../app/lib/utils' );
 
-describe( 'Utils library', function() {
+describe( 'Utils library', () => {
 
-    before( function() {} );
+    before( () => {} );
 
-    afterEach( function() {} );
+    afterEach( () => {} );
 
-    it( 'requires comprehensive testing', function() {
+    it( 'requires comprehensive testing', () => {
         return expect( true ).to.equal( true );
     } );
 

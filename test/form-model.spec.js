@@ -1,21 +1,18 @@
-/* global describe, require, it, before, after, beforeEach, afterEach */
-'use strict';
+/* eslint-env mocha */
 
-let chai = require( 'chai' );
-let expect = chai.expect;
-let chaiAsPromised = require( 'chai-as-promised' );
-let config = require( "../config/config" );
-let model = require( '../app/models/Xform' );
+const chai = require( 'chai' );
+const expect = chai.expect;
+const chaiAsPromised = require( 'chai-as-promised' );
 
 chai.use( chaiAsPromised );
 
-describe( 'Form Model', function() {
+describe( 'Form Model', () => {
 
-    before( function() {} );
+    before( () => {} );
 
-    afterEach( function() {} );
+    afterEach( () => {} );
 
-    it( 'requires comprehensive testing', function() {
+    it( 'requires comprehensive testing', () => {
         return expect( true ).to.equal( true );
     } );
 

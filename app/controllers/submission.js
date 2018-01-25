@@ -1,47 +1,45 @@
 'use strict';
 
-let router = require( 'express' ).Router();
-let Busboy = require( 'busboy' );
-let config = require( '../../config/config' );
-// let submission = require( '../models/submission' );
-let debug = require( 'debug' )( 'submission controller' );
-
-module.exports = function( app ) {
+const router = require( 'express' ).Router();
+const Busboy = require( 'busboy' );
+const config = require( '../../config/config' );
+// const submission = require( '../models/submission' );
+const debug = require( 'debug' )( 'submission controller' );
+module.exports = ( app ) => {
     app.use( '/submission', router );
+    app.use( '/fieldsubmission', router );
 };
 
 router
-    .all( '*', function( req, res, next ) {
-        let error;
-
+    .all( '*', ( req, res, next ) => {
+        // console.log( 'submission request Authorization headers', req.headers.authorization );
         res.set( {
             'X-OpenRosa-Version': '1.0',
-            'X-OpenRosa-Accept-Content-Length': config[ "max submission size" ] || 50 * 1024 * 1024
+            'X-OpenRosa-Accept-Content-Length': config[ 'max submission size' ] || 50 * 1024 * 1024
         } );
 
-        if ( !req.headers[ 'x-openrosa-version' ] || req.headers[ 'x-openrosa-version' ] !== '1.0' ) {
-            error = new Error( 'This server only supports OpenRosa 1.0 clients' );
-            error.status = 400;
-            next( error );
-        } else {
-            next();
-        }
+        //if ( !req.headers[ 'x-openrosa-version' ] || req.headers[ 'x-openrosa-version' ] !== '1.0' ) {
+        //    error = new Error( 'This server only supports OpenRosa 1.0 clients' );
+        //    error.status = 400;
+        //    next( error );
+        //} else {
+        next();
+        //}
     } )
-    .head( '/', function( req, res, next ) {
+    .head( '/', ( req, res, next ) => {
+        console.log( 'head' );
         res.status( 204 );
         res.end();
     } )
-    .post( '/', function( req, res, next ) {
-        let xmlData;
-        let files;
-        let busboy = new Busboy( {
+    .post( '/', ( req, res, next ) => {
+        const busboy = new Busboy( {
             headers: req.headers
         } );
 
-        busboy.on( 'file', function( fieldname, stream, filename, transferEncoding, mimeType ) {
-            if ( fieldname === 'xml_submission_file' ) {
+        debug( 'submission coming in from ', req.url, req.headers );
 
-            }
+        busboy.on( 'file', ( fieldname, stream, filename, transferEncoding, mimeType ) => {
+            //if ( fieldname === 'xml_submission_file' ) { }
             debug( 'file:', fieldname, filename, mimeType, stream );
         } );
 
@@ -62,7 +60,22 @@ router
             .catch( next );*/
         } );
 
-        req.pipe( busboy );
+        setTimeout( function() {
+            console.log( 'going to return OK' );
+            res.status( 201 ).send( '<ok/>' );
+        }, 0.2 * 1000 );
+        //req.pipe( busboy );
+
+    } )
+    .put( '/', function( req, res, next ) {
+        console.log( 'put' );
+        //const busboy = new Busboy( {   headers: req.headers} );
+
+        setTimeout( function() {
+            console.log( 'going to return OK' );
+            res.status( 201 ).send( '<ok/>' );
+        }, 1.5 * 1000 );
+        //req.pipe( busboy );
 
     } ).all( '*', function( req, res, next ) {
         res.status( 405 );

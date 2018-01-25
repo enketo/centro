@@ -2,6 +2,7 @@ node_modules
 .rebooted
 *.sublime-project
 *.sublime-workspace
+*.code-workspace
 npm-debug.log
 public/css
 public/js

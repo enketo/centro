@@ -1,7 +1,7 @@
 centro [![Build Status](https://travis-ci.org/enketo/centro.png)](https://travis-ci.org/enketo/centro)
 =============
 
-A very basic proof-of-concept fully ODK-compliant server for use with Enketo and ODK Collect. 
+A basic scaffolding of an ODK-compliant server for use with Enketo and ODK Collect. 
 
 **No database - forms and submissions are stored as files.**
 
@@ -15,7 +15,7 @@ future:
 * [authentication API](https://bitbucket.org/javarosa/javarosa/wiki/AuthenticationAPI)
 
 ### Pre-requisites
-* Node.js and npm
+* NodeJS 8+ and npm
 
 ### Install
 * install dependencies with `npm install`
@@ -30,5 +30,5 @@ future:
 
 ### Develop
 * install [nodemon](https://github.com/remy/nodemon)
-* run with `grunt develop`
+* run with `grunt develop` or `NODE_ENV=development node app.js`
 * test with `grunt test`

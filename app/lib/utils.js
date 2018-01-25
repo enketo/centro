@@ -1,7 +1,5 @@
-'use strict';
-
-let crypto = require( 'crypto' );
-let debug = require( 'debug' )( 'utils' );
+const crypto = require( 'crypto' );
+//const debug = require( 'debug' )( 'utils' );
 
 function _md5( message ) {
     let hash = crypto.createHash( 'md5' );
