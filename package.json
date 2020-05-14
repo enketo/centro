@@ -12,29 +12,28 @@
         "test": "grunt test"
     },
     "dependencies": {
-        "body-parser": "^1.4.3",
-        "busboy": "^0.2.8",
-        "compression": "1.7.x",
-        "cookie-parser": "1.4.x",
-        "debug": "3.1.x",
-        "express": "5.0.0-alpha.6",
-        "pug": "2.0.0-alpha6",
-        "libxmljs": "0.18.x",
-        "morgan": "1.9.x",
-        "serve-favicon": "2.4.5"
+        "body-parser": "^1.19.0",
+        "busboy": "^0.3.1",
+        "compression": "^1.7.4",
+        "cookie-parser": "^1.4.5",
+        "debug": "^4.1.1",
+        "express": "^4.17.1",
+        "pug": "^2.0.4",
+        "libxmljs": "^0.19.7",
+        "morgan": "^1.10.0",
+        "serve-favicon": "^2.5.0"
     },
     "devDependencies": {
-        "chai": "4.1.x",
-        "chai-as-promised": "7.1.x",
-        "grunt": "1.0.1",
-        "grunt-concurrent": "2.3.x",
-        "grunt-contrib-watch": "1.0.x",
-        "grunt-mocha-test": "0.13.x",
-        "grunt-nodemon": "0.4.2",
-        "grunt-sass": "2.0.0",
-        "load-grunt-tasks": "3.5.x",
-        "mocha": "5.0.x",
-        "request": "2.83.x",
-        "time-grunt": "1.4.x"
+        "chai": "^4.2.0",
+        "chai-as-promised": "^7.1.1",
+        "grunt": "^1.1.0",
+        "grunt-concurrent": "^3.0.0",
+        "grunt-contrib-watch": "^1.1.0",
+        "grunt-mocha-test": "^0.13.3",
+        "grunt-nodemon": "^0.4.2",
+        "grunt-sass": "^3.1.0",
+        "load-grunt-tasks": "^5.1.0",
+        "mocha": "^7.1.2",
+        "request": "^2.88.2"
     }
 }

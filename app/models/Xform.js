@@ -33,7 +33,7 @@ class Xform {
                         //debug( 'defaultNamespace', JSON.stringify( that.defaultNamespace[ 0 ] ) );
                         resolve( true );
                     } catch ( e ) {
-                        const err = new Error( 'XML Error in form "' + xforms.id + '": ' + JSON.stringify( e ) );
+                        const err = new Error( 'XML Error in form "' + xform.id + '": ' + JSON.stringify( e ) );
                         reject( err );
                     }
                 }
@@ -65,7 +65,6 @@ class Xform {
                         if ( manifestUrl ) {
                             props.manifestUrl = manifestUrl;
                         }
-                        console.log( 'props', props );
                         return props;
                     } );
             } );

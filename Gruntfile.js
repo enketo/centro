@@ -1,13 +1,10 @@
 'use strict';
 
 module.exports = function( grunt ) {
-    // show elapsed time at the end
-    require( 'time-grunt' )( grunt );
     // load all grunt tasks
     require( 'load-grunt-tasks' )( grunt );
 
-    var reloadPort = 35730,
-        files;
+    var reloadPort = 35730;
 
     grunt.initConfig( {
         pkg: grunt.file.readJSON( 'package.json' ),
