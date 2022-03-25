@@ -12,28 +12,28 @@
         "test": "grunt test"
     },
     "dependencies": {
-        "body-parser": "^1.19.0",
+        "body-parser": "^1.19.2",
         "busboy": "^0.3.1",
         "compression": "^1.7.4",
-        "cookie-parser": "^1.4.5",
-        "debug": "^4.1.1",
-        "express": "^4.17.1",
-        "pug": "^2.0.4",
+        "cookie-parser": "^1.4.6",
+        "debug": "^4.3.4",
+        "express": "^4.17.3",
         "libxmljs": "^0.19.7",
         "morgan": "^1.10.0",
+        "pug": "^2.0.4",
         "serve-favicon": "^2.5.0"
     },
     "devDependencies": {
-        "chai": "^4.2.0",
+        "chai": "^4.3.6",
         "chai-as-promised": "^7.1.1",
-        "grunt": "^1.1.0",
+        "grunt": "^1.4.1",
         "grunt-concurrent": "^3.0.0",
         "grunt-contrib-watch": "^1.1.0",
         "grunt-mocha-test": "^0.13.3",
         "grunt-nodemon": "^0.4.2",
         "grunt-sass": "^3.1.0",
         "load-grunt-tasks": "^5.1.0",
-        "mocha": "^7.1.2",
+        "mocha": "^7.2.0",
         "request": "^2.88.2"
     }
 }
