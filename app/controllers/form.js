@@ -43,11 +43,7 @@ router
             .catch( next );
     } )
     .get( '/:formId/media/:filename', ( req, res, next ) => {
-        // set content type
-        res.set( {
-            'Content-Type': 'text/xml'
-        } );
-        const file = fs.createReadStream( path.join( formStoragePath, req.formId + '-media', req.filename ) );
-        //res.set( 'Content-Type', 'video/mp4' );
+        const file = fs.createReadStream(path.join( formStoragePath, req.formId + '-media', req.filename ) );
+        res.contentType(req.params.filename);
         file.pipe( res );
     } );
