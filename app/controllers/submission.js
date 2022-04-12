@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require( 'express' ).Router();
-const Busboy = require( 'busboy' );
+const busboy = require( 'busboy' );
 const config = require( '../../config/config' );
 // const submission = require( '../models/submission' );
 const debug = require( 'debug' )( 'submission controller' );
@@ -23,61 +23,59 @@ router
         //    error.status = 400;
         //    next( error );
         //} else {
+
         next();
         //}
     } )
     .head( '/', ( req, res, next ) => {
-        console.log( 'head' );
         res.status( 204 );
         res.end();
     } )
     .post( '/', ( req, res, next ) => {
-        const busboy = new Busboy( {
+        const bb = busboy( {
             headers: req.headers
         } );
 
-        debug( 'submission coming in from ', req.url, req.headers );
-
-        busboy.on( 'file', ( fieldname, stream, filename, transferEncoding, mimeType ) => {
+        bb.on( 'file', ( fieldname, stream, filename, transferEncoding, mimeType ) => {
             //if ( fieldname === 'xml_submission_file' ) { }
-            debug( 'file:', fieldname, filename, mimeType, stream );
+            console.log( 'file:', fieldname, filename, mimeType, stream );
+            // do nothing with stream
+            stream.resume();
         } );
 
         // What to do? 
         // Save as temporary files and pass the paths to the submission model?
         // Pass XML submission as string?
         // What would work the best under heavy load?
-
-        busboy.on( 'finish', function() {
-            /*return submission.set( xmlData, files)
+        bb.on( 'close', () => {
+            //return submission.set( xmlData, files)
+            return Promise.resolve({ status: 201, xml: '<ok/>' })
             .then( function( response ) {
                 res.set( {
                     'Content-Type': 'text/xml'
                 } );
                 res.status(response.status)
-                res.send( response.xml );
+                    .send( response.xml );
             } )
-            .catch( next );*/
-        } );
+            .catch( next );
+        });
+
+        bb.on('error', next);
+
+        req.pipe( bb );
+    } )
+    .put( '/*', function( req, res, next ) {
+        console.log( 'put' );
+        //const bb = busboy( {   headers: req.headers} );
 
         setTimeout( function() {
             console.log( 'going to return OK' );
             res.status( 201 ).send( '<ok/>' );
         }, 0.2 * 1000 );
-        //req.pipe( busboy );
+        //req.pipe( bb );
 
     } )
-    .put( '/', function( req, res, next ) {
-        console.log( 'put' );
-        //const busboy = new Busboy( {   headers: req.headers} );
-
-        setTimeout( function() {
-            console.log( 'going to return OK' );
-            res.status( 201 ).send( '<ok/>' );
-        }, 1.5 * 1000 );
-        //req.pipe( busboy );
-
-    } ).all( '*', function( req, res, next ) {
+    .all( '*', function( req, res, next ) {
         res.status( 405 );
-        res.send( 'you is bad!' );
+        res.send( 'you are bad!' );
     } );
