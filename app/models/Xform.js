@@ -88,7 +88,7 @@ class Xform {
             throw new Error( 'id attribute not found for form "' + this.id + '"' );
         }
         // there has to be a better way to get this id and version...
-        id = id.attr( 'id' ).toString();
+        id = id.getAttribute( 'id' ).toString();
         return id.substring( 5, id.length - 1 );
     }
 
@@ -109,7 +109,7 @@ class Xform {
             return '';
         }
         // there has to be a better way to get this version...
-        version = version.attr( 'version' ).toString();
+        version = version.getAttribute( 'version' ).toString();
         return version.substring( 10, version.length - 1 );
     }
 
