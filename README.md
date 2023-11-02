@@ -15,7 +15,7 @@ future:
 * [authentication API](https://bitbucket.org/javarosa/javarosa/wiki/AuthenticationAPI)
 
 ### Pre-requisites
-* NodeJS 8+ and npm
+* NodeJS and npm
 
 ### Install
 * install dependencies with `npm install`
