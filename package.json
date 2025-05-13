@@ -3,10 +3,6 @@
     "version": "0.0.1",
     "private": false,
     "main": "./app.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/enketo/centro"
-    },
     "scripts": {
         "start": "node app.js",
         "test": "grunt test"
@@ -37,6 +33,25 @@
         "mocha": "^10.2.0",
         "request": "^2.88.2"
     },
+    "repository": "https://github.com/enketo/centro",
+    "license": "Apache-2.0",
+    "author": {
+        "name": "KoboToolbox",
+        "email": "enketo@kobotoolbox.org",
+        "url": "https://www.kobotoolbox.org/about-us/meet-the-team"
+    },
+    "contributors": [
+        {
+            "name": "ODK",
+            "email": "support@getodk.org",
+            "url": "https://getodk.org/about/team"
+        },
+        {
+            "name": "Martijn van de Rijdt",
+            "email": "martijn@enketo.org",
+            "url": "https://github.com/MartijnR"
+        }
+    ],
     "volta": {
         "node": "20.9.0"
     }
