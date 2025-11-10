@@ -52,6 +52,12 @@
 centro [![Build Status](https://travis-ci.org/enketo/centro.png)](https://travis-ci.org/enketo/centro)
 =============
 
+> **⚠️ Warning**
+>
+> **DO NOT USE THIS SERVER IN A PRODUCTION SETTING.**
+>
+> This lightweight development server has not gone through security audits or performance tests, hence is unsuitable for production use. Centro is intended for development and testing purposes only. Making this server able to handle a production environment is outside the scope of this project.
+
 A basic scaffolding of an ODK-compliant server for use with Enketo and ODK Collect. 
 
 **No database - forms and submissions are stored as files.**
