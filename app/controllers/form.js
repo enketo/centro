@@ -5,6 +5,7 @@ const fs = require( 'fs' );
 //const debug = require( 'debug' )( 'form controller' );
 const manifest = require( '../models/formManifest' );
 const path = require( 'path' );
+const utils = require( '../lib/utils' );
 const formStoragePath = path.resolve( __dirname, '../../storage/forms' );
 
 module.exports = function( app ) {
@@ -43,7 +44,16 @@ router
             .catch( next );
     } )
     .get( '/:formId/media/:filename', ( req, res, next ) => {
-        const file = fs.createReadStream(path.join( formStoragePath, req.formId + '-media', req.filename ) );
-        res.contentType(req.params.filename);
-        file.pipe( res );
+        try {
+            // Sanitize the filename to prevent path traversal attacks
+            const sanitizedFilename = utils.sanitizeFilename( req.filename );
+            const file = fs.createReadStream( path.join( formStoragePath, req.formId + '-media', sanitizedFilename ) );
+            res.contentType( req.params.filename );
+            file.pipe( res );
+        } catch ( error ) {
+            // Return 400 Bad Request for invalid filenames
+            const err = new Error( error.message );
+            err.status = 400;
+            next( err );
+        }
     } );
