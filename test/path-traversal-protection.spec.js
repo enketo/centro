@@ -32,7 +32,7 @@ describe("Path Traversal Protection", () => {
 
       maliciousFilenames.forEach((filename) => {
         expect(() => utils.sanitizeFilename(filename)).to.throw(
-          "Invalid filename provided"
+          "Invalid file provided"
         );
       });
     });
@@ -48,7 +48,7 @@ describe("Path Traversal Protection", () => {
 
       maliciousFilenames.forEach((filename) => {
         expect(() => utils.sanitizeFilename(filename)).to.throw(
-          "Invalid filename provided"
+          "Invalid file provided"
         );
       });
     });
@@ -87,7 +87,7 @@ describe("Path Traversal Protection", () => {
       encodedMaliciousFilenames.forEach((filename) => {
         const decoded = decodeURIComponent(filename);
         expect(() => utils.sanitizeFilename(decoded)).to.throw(
-          "Invalid filename provided"
+          "Invalid file provided"
         );
       });
     });

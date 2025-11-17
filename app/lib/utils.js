@@ -2,10 +2,10 @@ const crypto = require("crypto");
 const path = require("path");
 //const debug = require( 'debug' )( 'utils' );
 
-function _md5( message ) {
-    let hash = crypto.createHash( 'md5' );
-    hash.update( message );
-    return hash.digest( 'hex' );
+function _md5(message) {
+  let hash = crypto.createHash("md5");
+  hash.update(message);
+  return hash.digest("hex");
 }
 
 /**
@@ -24,22 +24,21 @@ function _sanitizeFilename(filename) {
     throw new Error("Invalid filename provided");
   }
 
-  // Check for path traversal patterns
+  // Sanitize fileName to prevent path traversal attacks
+  // Use path.normalize and path.basename to ensure only the filename is used
+  const sanitizedFileName = path.basename(path.normalize(filename));
+
+  // Reject if the normalized path differs significantly from the original
+  // This catches path separators or path traversal (.., ../, ..%, etc.)
   if (
-    filename.includes("..") ||
-    filename.includes("/") ||
-    filename.includes("\\")
+    !sanitizedFileName ||
+    sanitizedFileName !== filename ||
+    /[/\\]|\.\./.test(filename)
   ) {
-    throw new Error("Invalid filename provided");
+    throw new Error("Invalid file provided");
   }
 
-  // Additional check: use path.normalize and ensure result doesn't escape intended directory
-  const normalized = path.normalize(filename);
-  if (normalized !== filename || normalized.includes("..")) {
-    throw new Error("Invalid filename provided");
-  }
-
-  return filename;
+  return sanitizedFileName;
 }
 
 module.exports = {
