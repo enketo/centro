@@ -2,10 +2,10 @@ const crypto = require("crypto");
 const path = require("path");
 //const debug = require( 'debug' )( 'utils' );
 
-function _md5(message) {
-  let hash = crypto.createHash("md5");
-  hash.update(message);
-  return hash.digest("hex");
+function _md5( message ) {
+    let hash = crypto.createHash( 'md5' );
+    hash.update( message );
+    return hash.digest( 'hex' );
 }
 
 /**
