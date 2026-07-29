@@ -8,7 +8,7 @@
         "test": "grunt test"
     },
     "dependencies": {
-        "body-parser": "^1.20.2",
+        "body-parser": "^1.20.6",
         "busboy": "^1.6.0",
         "compression": "^1.7.4",
         "cookie-parser": "^1.4.6",
