@@ -3,11 +3,15 @@
 const router = require( 'express' ).Router();
 const busboy = require( 'busboy' );
 const config = require( '../../config/config' );
+const path = require('path');
+const os = require('os');
+const fs = require('fs');
 // const submission = require( '../models/submission' );
 const debug = require( 'debug' )( 'submission controller' );
 module.exports = ( app ) => {
     app.use( '/submission', router );
     app.use( '/fieldsubmission', router );
+    app.use( '/submission-full', router );
 };
 
 router
@@ -36,11 +40,16 @@ router
             headers: req.headers
         } );
 
-        bb.on( 'file', ( fieldname, stream, filename, transferEncoding, mimeType ) => {
+        bb.on( 'file', ( name, file, info ) => {
+            const { filename, encoding, mimeType } = info;
             //if ( fieldname === 'xml_submission_file' ) { }
-            console.log( 'file:', fieldname, filename, mimeType, stream );
+            //console.log( 'file:', fieldname, filename, mimeType, stream );
             // do nothing with stream
-            stream.resume();
+            //  stream.resume();
+
+            const saveTo = path.join(os.tmpdir(), filename);
+            console.log('saving to', os.tmpdir());
+            file.pipe(fs.createWriteStream(saveTo));
         } );
 
         // What to do? 
